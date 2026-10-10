@@ -1,25 +1,21 @@
-# Vault V3 — Deployment Savings Tracker
+# Vault — Deployment Savings Tracker (Initial Release)
 
-A standalone dark-blue deployment savings tracker, designed for GitHub Pages. No bank integration, account, or backend is required.
-
-## Deploy
-1. Create a GitHub repository.
-2. Upload `index.html` to the repository root.
-3. Under Settings → Pages, select Deploy from a branch, `main`, `/ (root)`.
-4. Open the published URL.
+Premium dark-blue deployment savings tracker with a dedicated V logo.
 
 ## Features
-- Savings goal, starting balance, and deployment dates entered by the user
-- Deposits, withdrawals, transaction deletion, and history
-- Deployment countdown and savings progress
-- Dynamic savings chart, monthly stats, and a pace-based projection
-- JSON backup export/import
-- Responsive desktop sidebar and mobile bottom navigation
+- Savings deposits, withdrawals, and transaction history
+- Editable savings goal, starting balance, and deployment dates
+- Savings growth chart and projected end balance
+- Required monthly savings pace to reach your goal
+- Transaction search and deposit/withdrawal filters
+- Hide/show balances for privacy
+- CSV transaction export and JSON backup/restore
 
-## Data and privacy
-Records are stored in the browser's localStorage, not synchronized across devices. Export backups frequently. Clearing site data, using private browsing, or switching browsers/devices can lose your records. The app does not send notifications or access bank accounts.
+## Publish
+Upload all files to the root of a GitHub Pages repository, then enable Pages from the main branch root.
 
-## Upgrade from V2
-V3 attempts to read the existing `deployment-savings-v1` localStorage key on the same site origin if V3 has no saved data yet. Moving to a different GitHub Pages domain does **not** migrate localStorage. Use V2's JSON export and V3's Restore feature instead.
+## Privacy
+Data is saved in your browser's local storage, not in GitHub. This is not encrypted; anyone with access to the same browser profile may access it. Export backups regularly. Data does not sync across devices.
 
-Projections are informational estimates only. All amounts start blank or at zero; no user's personal details are embedded.
+## Note
+Projections are estimates, not guaranteed financial outcomes.
