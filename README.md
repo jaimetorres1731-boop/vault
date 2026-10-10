@@ -1,21 +1,22 @@
-# Vault — Deployment Savings Tracker (Initial Release)
+# Vault V1.1 — Deployment Savings Tracker
 
-Premium dark-blue deployment savings tracker with a dedicated V logo.
+Update the existing Vault GitHub Pages site by uploading all files to the repository root. Export a JSON backup of the current app before updating.
 
 ## Features
-- Savings deposits, withdrawals, and transaction history
-- Editable savings goal, starting balance, and deployment dates
-- Savings growth chart and projected end balance
-- Required monthly savings pace to reach your goal
-- Transaction search and deposit/withdrawal filters
-- Hide/show balances for privacy
-- CSV transaction export and JSON backup/restore
+- Edit existing transactions; search, filter, add, and withdraw
+- Primary savings goal with optional subgoals sharing the same balance
+- Savings calendar, monthly reports, checkpoints and milestone indicators
+- Payday-labeled deposit insights and configurable in-app reminders
+- Conservative/expected/optimistic estimates after enough transaction history
+- JSON backups with V1.1 goal/reminder metadata; CSV transaction export
+- Optional PIN privacy screen (not encryption)
+- Installable PWA with offline cache on HTTPS
 
-## Publish
-Upload all files to the root of a GitHub Pages repository, then enable Pages from the main branch root.
+## Data migration
+The original data key `vault-deployment-v3` is preserved. V1.1 extension data uses `vault-v11-extras`. No records are uploaded to GitHub. Browser localStorage is not encrypted and does not sync between devices.
 
-## Privacy
-Data is saved in your browser's local storage, not in GitHub. This is not encrypted; anyone with access to the same browser profile may access it. Export backups regularly. Data does not sync across devices.
+## Limitations
+Reminders are shown when Vault is opened, not pushed to closed devices. PIN lock is only a privacy screen. Predictions are estimates. A deployment savings calendar is not a bank statement.
 
-## Note
-Projections are estimates, not guaranteed financial outcomes.
+## Testing
+Verify on GitHub Pages (HTTPS): original savings data, edit, calendar, goals, JSON backup and restore, offline reload after first visit, and PIN behavior. Do not delete the current working release until testing is complete.
