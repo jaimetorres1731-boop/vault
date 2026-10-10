@@ -1,21 +1,26 @@
-# Vault V1.2 — Savings Dashboard Update
+# Vault V1.2 — Navigation & Spacing Update
 
-Deploy to the existing GitHub Pages `vault` repository by uploading every file from this ZIP to the repository root, replacing matching filenames. Back up V1.1 first.
+This update reorganizes the existing V1.2 app into seven distinct page-like views without changing existing savings records.
 
-## Added
-- New savings command center with total balance, monthly net, required monthly pace, and progress against deployment timeline
-- Recent activity timeline
-- Payday planning for 1st/15th, biweekly or monthly schedules; projections are *planning only*, not recorded deposits
-- Monthly savings health indicators
-- Backup readiness display and structural record check
-- Mobile layout improvements, faster lightweight rendering, updated offline PWA cache
-- Full JSON backup and restore now includes payday planner settings in addition to transactions, goals and reminders
+## Changes
+- Collapsible desktop sidebar (preference saved locally)
+- Dashboard, Transactions, Savings Goals, Calendar, Insights, Payday Planner, Settings
+- Mobile bottom navigation (Home, Activity, Goals, Insights, More)
+- Additional mobile sections under More (Calendar, Payday Planner, Settings)
+- Better spacing between sections; no more stacked cards touching
+- Existing quick deposit/withdraw buttons still lead to the transaction form
+- Legal footer and all V1.2 features preserved
+- Updated offline PWA cache to include navigation files
 
-## Preserved
-V1.1 transactions, primary goal, optional goals, calendar, reports, projections, privacy PIN, reminders, legal pages and approved Vault branding.
+## Installation
+1. Export a full JSON backup from your existing Vault app.
+2. Extract the ZIP and upload all files to the same GitHub Pages repository root.
+3. Replace files with matching names; do not remove legal pages.
+4. Commit and wait for GitHub Pages to deploy.
+5. Hard refresh, then test navigation on desktop and mobile.
 
-## Data and privacy
-The original localStorage keys are preserved. V1.2 uses `vault-v12-payplan` for payday plans. No bank access, backend or account creation. Privacy PIN does not encrypt records. A JSON backup is essential before updating. A local validation check is not equivalent to testing restoration.
+## Safety
+All financial records remain in browser localStorage under existing keys. No new bank access or remote storage is introduced. The privacy PIN remains a convenience screen, not encryption.
 
-## QA
-JavaScript syntax checks and ZIP checks were performed. Interactive browser testing is still needed. Test existing data, all new dashboard sections, backup/restore in a separate browser profile, mobile, and offline reload before treating V1.2 as a production release.
+## Test status
+JavaScript syntax and package checks passed. A live browser smoke test could not be completed in this environment; validate tab navigation, layout, deposits, goals, backups, and mobile More menu on the published site before considering this production-ready.
