@@ -20,3 +20,9 @@ Reminders are shown when Vault is opened, not pushed to closed devices. PIN lock
 
 ## Testing
 Verify on GitHub Pages (HTTPS): original savings data, edit, calendar, goals, JSON backup and restore, offline reload after first visit, and PIN behavior. Do not delete the current working release until testing is complete.
+
+## V1.1 legal and backup patch
+- Persistent footer with Privacy Policy, Terms of Use, and Financial & Security Disclaimers pages.
+- JSON backup now includes optional goals and reminder settings; supports legacy V1 backups.
+- Restore validates backup and prompts before replacing local data.
+- These policies are templates tailored to this static app, not a substitute for legal review. Add a support/privacy contact before public distribution.
