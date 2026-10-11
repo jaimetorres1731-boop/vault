@@ -1,24 +1,23 @@
-# Vault V1.4.1 — Transaction Categories & Filters
+# Vault V1.5 — Customizable Dashboard
 
-Includes all V1.4 features, with optional categories for deposits and withdrawals.
+This release builds on Vault V1.4.1 and preserves all existing data, transaction categories, Insights, tutorial, and navigation.
 
-## Added
-- Deposit categories: Paycheck, Bonus, Gift, Transfer, Other
-- Withdrawal categories: Bills, Shopping, Emergency, Transfer, Other
-- Uncategorized remains the default
-- Category shown in transaction history and included in search
-- Category filter on Transactions tab
-- Edit a transaction to assign/change its category
-- Insights breakdown by category, separated into deposits and withdrawals
-- CSV export includes Category
-- Existing JSON backups retain category fields
-- Older records automatically appear as Uncategorized (no data migration)
+## New features
+- Customize Dashboard button on the Dashboard tab.
+- Show or hide Financial Overview, Deployment Progress, and Quick Stats.
+- Move sections up/down to choose their order.
+- Total Savings is always visible and always first.
+- Reset layout to the recommended defaults.
+- Changes are stored locally under `vault-v15-dashboard-layout` and restored when the app reopens.
+- Accessible dialog and controls with keyboard labels; mobile-friendly design.
+- No financial records are moved, changed, or deleted.
 
-## Deploy
-1. Export a JSON backup of your existing data.
-2. Extract ZIP and upload all files to the existing GitHub Pages repository root, replacing matching files.
-3. Commit and refresh the published site.
-4. Test deposit, withdrawal, edit category, filter, CSV export, backup and restore, and Insights.
+## Deployment
+1. Export your existing Vault JSON backup before upgrading.
+2. Extract this ZIP into the root of your existing GitHub Pages repository and replace matching files.
+3. Commit, wait for Pages to deploy, then refresh/reopen the installed app.
+4. Test Customize Dashboard, hide/show, move up/down, reset, refresh persistence, and mobile layout.
 
-This is a local-only tracker. No financial information is sent to a server.
-JavaScript syntax and ZIP integrity were checked; browser testing is still required.
+Note: Layout settings are device/browser-local and are not currently included in JSON backup exports. This is separate from financial records.
+
+Validation: JavaScript syntax and ZIP integrity checked. Live browser tests are still required.

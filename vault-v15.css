@@ -1,0 +1,20 @@
+.vault-v15-toolbar{display:flex;justify-content:space-between;align-items:center;gap:12px;margin:0 0 18px;flex-wrap:wrap}
+.vault-v15-toolbar p{font-size:13px;color:#a8c5df;margin:0}
+.vault-v15-toolbar .btn{white-space:nowrap}
+.vault-v15-hidden{display:none!important}
+.vault-v15-dialog{width:min(600px,calc(100% - 24px));max-height:min(85vh,720px);overflow:auto;border:1px solid #397ab0;border-radius:22px;background:#0d2238;color:#f2f8ff;padding:24px;box-shadow:0 28px 90px #000a}
+.vault-v15-dialog::backdrop{background:#020b17c9;backdrop-filter:blur(3px)}
+.vault-v15-head,.vault-v15-footer{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.vault-v15-head h2{margin:0;font-size:21px}
+.vault-v15-help{font-size:13px;color:#a8c4db;line-height:1.6;margin:12px 0 20px}
+.vault-v15-controls{display:grid;gap:10px}
+.vault-v15-control{border:1px solid #2a506f;border-radius:13px;padding:14px;display:flex;align-items:center;justify-content:space-between;gap:15px;background:#102c47}
+.vault-v15-label{display:grid;gap:5px;min-width:0}.vault-v15-label strong{font-size:14px}.vault-v15-label small{font-size:11px;color:#a9c4d8;line-height:1.4}
+.vault-v15-actions{display:flex;align-items:center;gap:7px;flex-shrink:0}
+.vault-v15-toggle{display:flex;align-items:center;gap:5px;font-size:11px;color:#c2d7e9;white-space:nowrap;cursor:pointer}
+.vault-v15-toggle input{accent-color:var(--vault-accent,#37b7ff);width:17px;height:17px}
+.vault-v15-iconbtn{border:1px solid #376a94;border-radius:9px;background:#163a5b;color:#e9f5ff;min-width:34px;height:34px;font-size:20px;cursor:pointer}
+.vault-v15-iconbtn:hover:not(:disabled){background:#22577f}.vault-v15-iconbtn:disabled{opacity:.35;cursor:not-allowed}
+.vault-v15-footer{margin-top:23px;justify-content:flex-end;flex-wrap:wrap}
+@media(max-width:550px){.vault-v15-dialog{padding:17px}.vault-v15-control{align-items:stretch;flex-direction:column;gap:10px}.vault-v15-actions{justify-content:space-between}.vault-v15-toolbar{align-items:stretch}.vault-v15-toolbar .btn{width:100%}}
+@media(prefers-reduced-motion:reduce){.vault-v15-dialog::backdrop{backdrop-filter:none}}
