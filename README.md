@@ -1,9 +1,24 @@
-# Vault V1.4 — Advanced Savings Insights
+# Vault V1.4.1 — Transaction Categories & Filters
 
-Adds an Insights-first panel with current and previous month net savings, a month-over-month dollar comparison, a six-month chart of net deposits and withdrawals, average net savings over the last three completed active months, and historical withdrawal totals.
+Includes all V1.4 features, with optional categories for deposits and withdrawals.
 
-The current month is incomplete. Empty months show zero in the chart but are excluded from the active-month average. No financial data leaves the browser. This does not make predictions or financial guarantees.
+## Added
+- Deposit categories: Paycheck, Bonus, Gift, Transfer, Other
+- Withdrawal categories: Bills, Shopping, Emergency, Transfer, Other
+- Uncategorized remains the default
+- Category shown in transaction history and included in search
+- Category filter on Transactions tab
+- Edit a transaction to assign/change its category
+- Insights breakdown by category, separated into deposits and withdrawals
+- CSV export includes Category
+- Existing JSON backups retain category fields
+- Older records automatically appear as Uncategorized (no data migration)
 
-Before uploading, export your current Vault JSON backup. Upload all extracted files to the existing GitHub Pages repository root, replacing matching files. Commit, wait for deployment, hard-refresh, and check Insights on desktop and mobile.
+## Deploy
+1. Export a JSON backup of your existing data.
+2. Extract ZIP and upload all files to the existing GitHub Pages repository root, replacing matching files.
+3. Commit and refresh the published site.
+4. Test deposit, withdrawal, edit category, filter, CSV export, backup and restore, and Insights.
 
-JavaScript syntax and ZIP integrity checked. Live browser behavior has not been verified.
+This is a local-only tracker. No financial information is sent to a server.
+JavaScript syntax and ZIP integrity were checked; browser testing is still required.

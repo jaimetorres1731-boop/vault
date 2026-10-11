@@ -1,0 +1,13 @@
+
+.vault-cat-filter{margin:12px 0 15px;max-width:250px}
+.vault-cat-filter label{margin-bottom:6px}
+.vault-cat-insight{grid-column:1/-1!important}
+.vault-cat-insight h3{font-size:14px;margin:0 0 16px;color:#e6f4ff}
+.vault-cat-columns{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px;margin-top:18px}
+.vault-cat-columns>div{background:#0c2135;border:1px solid #254663;border-radius:15px;padding:18px}
+.vault-cat-row{margin-bottom:16px}
+.vault-cat-row-heading{display:flex;justify-content:space-between;gap:10px;font-size:12px;color:#b8cce0;margin-bottom:7px}
+.vault-cat-row-heading strong{color:#f0f8ff;font-variant-numeric:tabular-nums}
+.vault-cat-track{height:8px;border-radius:10px;background:#203d55;overflow:hidden}
+.vault-cat-bar{height:100%;background:var(--vault-accent,#36b7ff);border-radius:10px}
+@media(max-width:700px){.vault-cat-columns{grid-template-columns:1fr}}
