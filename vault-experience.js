@@ -7,9 +7,39 @@ const addCard=(parent,title,desc)=>{const c=make('section',undefined,'vault-expe
 const dash=$('vault-page-home')?.querySelector('.vault-page-content'),setting=$('vault-page-settings')?.querySelector('.vault-page-content');if(!dash||!setting)return;
 const intro=addCard(dash,'Install Vault & take a tour','Get quick access from your home screen and learn how to use your savings dashboard.');intro.style.gridColumn='1/-1';intro.style.order='-2';
 const actions=make('div',undefined,'vault-experience-actions'),install=make('button','Install Vault','btn primary'),tourBtn=make('button','Start walkthrough','btn');install.type=tourBtn.type='button';actions.append(install,tourBtn);intro.append(actions);const installNote=make('p','','vault-install-note');intro.append(installNote);
-let promptEvent=null;window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();promptEvent=e;installNote.textContent='Install is available in this browser.'});
-function explainInstall(){const ios=/iPad|iPhone|iPod/.test(navigator.userAgent);installNote.textContent=ios?'On iPhone or iPad, tap Share in Safari, then Add to Home Screen.':window.matchMedia('(display-mode: standalone)').matches?'Vault is already running as an installed app.':'If no install prompt appears, open your browser menu and choose Install app or Add to Home Screen (when available).'}
-install.onclick=async()=>{if(promptEvent){const p=promptEvent;promptEvent=null;await p.prompt();try{await p.userChoice}catch{}explainInstall()}else explainInstall()};explainInstall();
+let promptEvent=null;
+const isInstalledMode=()=>window.matchMedia('(display-mode: standalone)').matches||window.matchMedia('(display-mode: fullscreen)').matches||navigator.standalone===true;
+const installStateKey='vault-install-completed';
+const installedHere=()=>{try{return localStorage.getItem(installStateKey)==='true'}catch{return false}};
+function updateInstallUI(){
+ const installed=isInstalledMode()||installedHere();
+ install.hidden=installed;
+ installNote.textContent=installed?'Vault is installed. You can reopen this tutorial anytime.':'';
+ const original=$('installApp');if(original)original.hidden=installed||!promptEvent;
+}
+window.addEventListener('beforeinstallprompt',e=>{
+ e.preventDefault();
+ if(isInstalledMode()||installedHere()){updateInstallUI();return}
+ promptEvent=e;updateInstallUI();
+});
+window.addEventListener('appinstalled',()=>{
+ try{localStorage.setItem(installStateKey,'true')}catch{}
+ promptEvent=null;updateInstallUI();
+});
+install.onclick=async()=>{
+ if(isInstalledMode()||installedHere()){updateInstallUI();return}
+ if(promptEvent){
+  const p=promptEvent;promptEvent=null;
+  try{await p.prompt();const result=await p.userChoice;
+   if(result?.outcome==='accepted')installNote.textContent='Installation started. The install option will disappear when installation completes.';
+   else installNote.textContent='Installation canceled. You can install Vault later.';
+  }catch{installNote.textContent='Your browser could not open the install prompt.'}
+  updateInstallUI();
+ }else{
+  installNote.textContent=/iPad|iPhone|iPod/.test(navigator.userAgent)?'In Safari, tap Share, then Add to Home Screen.':'Use your browser menu and choose Install app or Add to Home Screen, if available.';
+ }
+};
+updateInstallUI();
 const theme=addCard(setting,'Appearance','Choose an accent color. Your layout and savings data stay unchanged.');theme.style.gridColumn='1/-1';const palette=make('div',undefined,'vault-accent-grid');theme.append(palette);
 const themes=[['blue','#2ea9f5','Electric blue'],['violet','#9165e8','Violet'],['emerald','#14b88c','Emerald'],['gold','#d6a146','Gold'],['rose','#e95c94','Rose']];
 function applyTheme(id){if(!themes.some(t=>t[0]===id))id='blue';document.body.dataset.vaultTheme=id;for(const b of palette.querySelectorAll('button'))b.setAttribute('aria-pressed',String(b.dataset.theme===id))}

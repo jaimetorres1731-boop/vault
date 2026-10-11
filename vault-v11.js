@@ -73,7 +73,7 @@ $('unlockBtn').onclick=async()=>{if(await hash($('unlockPin').value)===localStor
 $('unlockPin').onkeydown=e=>{if(e.key==='Enter')$('unlockBtn').click()};
 lock();
 let deferredPrompt;
-window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferredPrompt=e;$('installApp').hidden=false});
+window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferredPrompt=e;$('installApp').hidden=window.matchMedia('(display-mode: standalone)').matches||navigator.standalone===true});
 $('installApp').onclick=async()=>{if(deferredPrompt){deferredPrompt.prompt();await deferredPrompt.userChoice;deferredPrompt=null;$('installApp').hidden=true}};
 if('serviceWorker' in navigator&&location.protocol==='https:')navigator.serviceWorker.register('./sw.js').catch(()=>{});
 draw();

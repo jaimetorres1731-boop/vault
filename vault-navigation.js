@@ -24,8 +24,9 @@ for(const def of definitions){
  const content=document.createElement('div');content.className='vault-page-content';page.append(head,content);pages[def.id]=content;root.append(page)
 }
 // Preserve every original node and its event listeners. Only reorganize DOM locations.
-take(find('v12Overview'),pages.home);
+// Put the real-time total savings hero first, followed by overview and progress.
 take(oldChildren[0],pages.home);
+take(find('v12Overview'),pages.home);
 take(oldChildren[1],pages.home);
 take(oldChildren[5],pages.home);
 take(find('plan'),pages.transactions);

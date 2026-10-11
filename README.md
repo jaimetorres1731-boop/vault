@@ -1,16 +1,18 @@
-# Vault V1.2 — Experience Update
+# Vault V1.2 — Savings First Dashboard Update
 
-Includes all previous V1.2 functionality and adds:
-- Prominent **Install Vault** dashboard button with browser-specific fallback instructions
-- Seven-step first-use walkthrough and replay button
-- Five locally saved accent themes: electric blue, violet, emerald, gold, rose
-- Optional browser notification permission and test notification; payday alerts while the app is open
-- Updated service worker cache for offline installation
+This update builds on the install-prompt fix and experience update.
 
-**Important:** True push notifications when the app is closed are NOT included. They require a secure backend, push subscription management, and a notification service. The application still stores savings records locally; bank integration remains deferred.
+## Dashboard order
+1. Total Savings — the primary savings balance and quick deposit/withdraw actions
+2. Financial Overview — monthly savings, remaining goal and goal pacing
+3. Deployment Progress — deployment countdown and timeline
+4. Quick Stats — additional savings metrics
 
-## Deployment
-Export a full JSON backup first. Upload every file from the ZIP to the root of the existing GitHub Pages repository. Replace matching files. Test the install button, walkthrough, themes, and notifications on the live HTTPS site. No financial records should be committed to GitHub.
+## Preserved
+Collapsible sidebar, mobile navigation, tutorial, accent themes, install-prompt behavior, savings data, reports, backups, and legal pages.
 
-## QA
-JavaScript syntax and ZIP integrity were checked. Live interactive browser tests still need to be completed. Browser install prompts and notifications vary by platform.
+## Deploy
+Export a JSON backup first. Extract the ZIP and replace the matching files in the GitHub Pages repository. Commit and hard-refresh the website or installed app. Test on desktop and mobile.
+
+## Verification
+JavaScript syntax and ZIP integrity checks completed; live browser functionality has not been verified.

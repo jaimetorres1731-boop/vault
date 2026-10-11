@@ -63,3 +63,10 @@ body.vault-side-collapsed .vault-nav-collapse{text-align:center}
 .vault-page-content #v12Overview{grid-column:1/-1}
 .vault-page-content .forms{grid-column:1/-1}
 @media(max-width:790px){.vault-page-content>.card.hero{grid-column:1/-1}}
+
+/* Savings balance leads the dashboard; follow-up cards have clear breathing room. */
+#vault-page-home .vault-page-content>.hero{grid-column:1/-1;order:0}
+#vault-page-home #v12Overview{order:1}
+#vault-page-home .vault-page-content>.card:not(.hero):not(#v12Overview){order:2}
+#vault-page-home .vault-page-content{gap:24px}
+@media(max-width:790px){#vault-page-home .vault-page-content{gap:18px}}
