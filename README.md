@@ -1,17 +1,9 @@
-# Vault V1.3 — Organized Tabs Update
+# Vault V1.4 — Advanced Savings Insights
 
-This update builds on V1.3 Transaction Modal. It reorganizes each tab so the most useful information appears first.
+Adds an Insights-first panel with current and previous month net savings, a month-over-month dollar comparison, a six-month chart of net deposits and withdrawals, average net savings over the last three completed active months, and historical withdrawal totals.
 
-- Dashboard: Total Savings → Financial Overview → Deployment Progress → Quick Stats.
-- Transactions: Recent Transactions → Recent Savings Activity → transaction entry/editing.
-- Savings Goals: Optional Goals → main Savings Plan settings.
-- Calendar: Savings Calendar.
-- Insights: Savings Growth → Projection → Monthly Health → Savings Insights → Monthly Report.
-- Payday Planner: Payday Planner → reminders and privacy controls.
-- Settings: Backup Readiness → Data & Backups.
+The current month is incomplete. Empty months show zero in the chart but are excluded from the active-month average. No financial data leaves the browser. This does not make predictions or financial guarantees.
 
-No savings data is deleted or migrated. Existing elements are moved within the page, preserving their IDs and handlers.
+Before uploading, export your current Vault JSON backup. Upload all extracted files to the existing GitHub Pages repository root, replacing matching files. Commit, wait for deployment, hard-refresh, and check Insights on desktop and mobile.
 
-Install: Export your current JSON backup, upload all extracted files to the same GitHub Pages repo, replace matching files, and commit. Test each tab, transactions, savings plan edits, and mobile navigation after deployment.
-
-Checks: JavaScript syntax and ZIP integrity passed. Live browser testing is still needed.
+JavaScript syntax and ZIP integrity checked. Live browser behavior has not been verified.
