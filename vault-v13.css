@@ -1,0 +1,21 @@
+
+/* V1.3: accessible modal transaction flow */
+.v13-modal{position:fixed;inset:0;z-index:1000;display:none;align-items:center;justify-content:center;padding:16px;background:rgba(1,8,19,.78);backdrop-filter:blur(8px)}
+.v13-modal.is-open{display:flex}
+.v13-dialog{width:min(100%,480px);max-height:min(90dvh,780px);overflow:auto;position:relative;background:linear-gradient(150deg,#152d48,#071523);border:1px solid #3573a2;box-shadow:0 30px 85px #000a;border-radius:22px;padding:24px;color:#f4f8ff}
+.v13-dialog .card{border:0;background:none;box-shadow:none;padding:0}
+.v13-dialog .formgrid{display:grid;grid-template-columns:1fr;gap:14px}
+.v13-dialog form .btn{width:100%;margin-top:20px}
+.v13-dialog .v13-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:17px}
+.v13-dialog .v13-head h2{margin:0;font-size:22px}
+.v13-close{font-size:23px;border:1px solid #34516d;border-radius:12px;background:#10273d;color:#e8f4ff;min-width:43px;min-height:43px}
+.v13-modal #transactionPanel>h2{display:none}
+.v13-modal #transactionPanel #type{display:none}
+.v13-modal #transactionPanel label[for=type]{display:none}
+.v13-dialog .v13-warning{color:#ffc1c9;background:#472331;border:1px solid #84435c;padding:11px;border-radius:11px;font-size:12px;line-height:1.5;margin:12px 0}
+.v13-transaction-entry{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.v13-undo{position:fixed;bottom:calc(90px + env(safe-area-inset-bottom));left:50%;transform:translateX(-50%);z-index:1100;display:none;align-items:center;gap:12px;background:#0e3557;border:1px solid #3a9bd7;border-radius:14px;padding:13px 16px;box-shadow:0 14px 40px #0009;color:white;max-width:calc(100vw - 30px);font-size:13px}
+.v13-undo.is-visible{display:flex}
+.v13-undo button{border:1px solid #67c9ff;background:#124a77;border-radius:9px;color:white;padding:9px 13px;font-weight:700}
+@media(max-width:550px){.v13-dialog{padding:20px;border-radius:18px}.v13-modal{align-items:flex-end;padding:0}.v13-dialog{border-radius:20px 20px 0 0;max-height:94dvh;width:100%}}
+@media(prefers-reduced-motion:reduce){.v13-modal{backdrop-filter:none}}

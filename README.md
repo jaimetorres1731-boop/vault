@@ -1,18 +1,19 @@
-# Vault V1.2 — Savings First Dashboard Update
+# Vault V1.3 — Transaction Modal Update
 
-This update builds on the install-prompt fix and experience update.
+## Features
+- Banking-style modal for deposits and withdrawals, launched from dashboard shortcuts or Transactions tab
+- Withdrawal confirmation before saving; deposits save immediately
+- Undo newly saved transaction for 10 seconds
+- Focus management, Escape key, outside-click close, and mobile bottom sheet
+- Keeps existing data key, edit/history features, goals, backups, themes, tutorial, and collapsible navigation
 
-## Dashboard order
-1. Total Savings — the primary savings balance and quick deposit/withdraw actions
-2. Financial Overview — monthly savings, remaining goal and goal pacing
-3. Deployment Progress — deployment countdown and timeline
-4. Quick Stats — additional savings metrics
+## Install
+1. Export your Vault JSON backup first.
+2. Upload the entire ZIP contents to your existing GitHub Pages repository root, replacing matching files.
+3. Commit and refresh the app; installed PWAs may need a second refresh for the updated service worker.
+4. Test deposits, withdrawals, canceled withdrawals, Undo, balances, history, and mobile layout.
 
-## Preserved
-Collapsible sidebar, mobile navigation, tutorial, accent themes, install-prompt behavior, savings data, reports, backups, and legal pages.
-
-## Deploy
-Export a JSON backup first. Extract the ZIP and replace the matching files in the GitHub Pages repository. Commit and hard-refresh the website or installed app. Test on desktop and mobile.
-
-## Verification
-JavaScript syntax and ZIP integrity checks completed; live browser functionality has not been verified.
+## Notes
+- Undo reverses only the newly saved transaction, not older records.
+- Data remains in the browser; the PIN is not encryption.
+- JavaScript syntax checks passed, but this update has not undergone a live browser integration test.
