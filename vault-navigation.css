@@ -70,3 +70,30 @@ body.vault-side-collapsed .vault-nav-collapse{text-align:center}
 #vault-page-home .vault-page-content>.card:not(.hero):not(#v12Overview){order:2}
 #vault-page-home .vault-page-content{gap:24px}
 @media(max-width:790px){#vault-page-home .vault-page-content{gap:18px}}
+
+/* V1.3 tab content hierarchy */
+.vault-page-content{align-items:start;gap:22px}
+.vault-page-content #activity,
+.vault-page-content #v12Activity,
+.vault-page-content #plan,
+.vault-page-content #goals,
+.vault-page-content #calendarSection,
+.vault-page-content #v12Health,
+.vault-page-content #insights,
+.vault-page-content #monthlyReport,
+.vault-page-content #v12Planner,
+.vault-page-content #reminders,
+.vault-page-content #v12Recovery,
+.vault-page-content #data{grid-column:1/-1}
+.vault-page-content #activity{order:0}
+.vault-page-content #v12Activity{order:1}
+.vault-page-content #plan{order:2}
+.vault-page-content #goals{order:0}
+.vault-page-content #settingsForm{margin-top:12px}
+.vault-page-content>.card:has(#settingsForm){grid-column:1/-1}
+.vault-page-content #v12Recovery{order:0}
+.vault-page-content #data{order:1}
+.vault-page-content #v12Planner{order:0}
+.vault-page-content #reminders{order:1}
+.vault-page-content .card,.vault-page-content .v12-card{min-width:0}
+@media(max-width:790px){.vault-page-content{gap:18px}}

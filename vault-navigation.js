@@ -23,26 +23,36 @@ for(const def of definitions){
  const text=document.createElement('div');const h=document.createElement('h2');h.textContent=def.name;const p=document.createElement('p');p.textContent=def.desc;text.append(h,p);head.append(text);
  const content=document.createElement('div');content.className='vault-page-content';page.append(head,content);pages[def.id]=content;root.append(page)
 }
-// Preserve every original node and its event listeners. Only reorganize DOM locations.
-// Put the real-time total savings hero first, followed by overview and progress.
-take(oldChildren[0],pages.home);
-take(find('v12Overview'),pages.home);
-take(oldChildren[1],pages.home);
-take(oldChildren[5],pages.home);
-take(find('plan'),pages.transactions);
-take(find('activity'),pages.transactions);
-take(find('v12Activity'),pages.transactions);
-take(find('goals'),pages.goals);
+// Prioritize the information users need first on every tab.
+// Move existing elements without recreating them so their data and handlers remain intact.
+take(oldChildren[0],pages.home); // Total Savings
+take(find('v12Overview'),pages.home); // Financial Overview
+take(oldChildren[1],pages.home); // Deployment Progress
+take(oldChildren[5],pages.home); // Quick Stats
+
+take(find('activity'),pages.transactions); // Full recent transaction history FIRST
+take(find('v12Activity'),pages.transactions); // Activity timeline
+// Move the savings-plan settings out of the transaction entry form.
+const planWrapper=find('plan');
+const savingsPlanCard=planWrapper&&[...planWrapper.children].find(el=>el.querySelector('#settingsForm'));
+take(planWrapper,pages.transactions); // Transaction entry/edit tools
+
+take(find('goals'),pages.goals); // Optional goals
+take(savingsPlanCard,pages.goals); // Main savings target and dates
+
 take(find('calendarSection'),pages.calendar);
-take(oldChildren[2],pages.insights);
-take(oldChildren[3],pages.insights);
-take(find('insights'),pages.insights);
-take(find('monthlyReport'),pages.insights);
-take(find('v12Health'),pages.insights);
-take(find('v12Planner'),pages.payday);
-take(find('reminders'),pages.payday);
-take(find('data'),pages.settings);
-take(find('v12Recovery'),pages.settings);
+
+take(oldChildren[2],pages.insights); // Savings growth
+take(oldChildren[3],pages.insights); // Projection
+take(find('v12Health'),pages.insights); // Monthly health
+take(find('insights'),pages.insights); // Savings forecasts and milestones
+take(find('monthlyReport'),pages.insights); // Monthly report
+
+take(find('v12Planner'),pages.payday); // Planner first
+take(find('reminders'),pages.payday); // Recurrence reminders
+
+take(find('v12Recovery'),pages.settings); // Backup readiness first
+take(find('data'),pages.settings); // Backup and restore
 for(const item of oldChildren)if(!used.has(item))take(item,pages.settings);
 root.classList.remove('grid');root.classList.add('vault-pages');
 const nav=sidebar.querySelector('.nav');

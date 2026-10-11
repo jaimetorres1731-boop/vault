@@ -1,19 +1,17 @@
-# Vault V1.3 — Transaction Modal Update
+# Vault V1.3 — Organized Tabs Update
 
-## Features
-- Banking-style modal for deposits and withdrawals, launched from dashboard shortcuts or Transactions tab
-- Withdrawal confirmation before saving; deposits save immediately
-- Undo newly saved transaction for 10 seconds
-- Focus management, Escape key, outside-click close, and mobile bottom sheet
-- Keeps existing data key, edit/history features, goals, backups, themes, tutorial, and collapsible navigation
+This update builds on V1.3 Transaction Modal. It reorganizes each tab so the most useful information appears first.
 
-## Install
-1. Export your Vault JSON backup first.
-2. Upload the entire ZIP contents to your existing GitHub Pages repository root, replacing matching files.
-3. Commit and refresh the app; installed PWAs may need a second refresh for the updated service worker.
-4. Test deposits, withdrawals, canceled withdrawals, Undo, balances, history, and mobile layout.
+- Dashboard: Total Savings → Financial Overview → Deployment Progress → Quick Stats.
+- Transactions: Recent Transactions → Recent Savings Activity → transaction entry/editing.
+- Savings Goals: Optional Goals → main Savings Plan settings.
+- Calendar: Savings Calendar.
+- Insights: Savings Growth → Projection → Monthly Health → Savings Insights → Monthly Report.
+- Payday Planner: Payday Planner → reminders and privacy controls.
+- Settings: Backup Readiness → Data & Backups.
 
-## Notes
-- Undo reverses only the newly saved transaction, not older records.
-- Data remains in the browser; the PIN is not encryption.
-- JavaScript syntax checks passed, but this update has not undergone a live browser integration test.
+No savings data is deleted or migrated. Existing elements are moved within the page, preserving their IDs and handlers.
+
+Install: Export your current JSON backup, upload all extracted files to the same GitHub Pages repo, replace matching files, and commit. Test each tab, transactions, savings plan edits, and mobile navigation after deployment.
+
+Checks: JavaScript syntax and ZIP integrity passed. Live browser testing is still needed.
