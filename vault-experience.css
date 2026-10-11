@@ -1,0 +1,20 @@
+
+:root{--vault-accent:#2ea9f5;--vault-accent-soft:#103d63;--vault-accent-light:#7bd3ff}
+.vault-experience-card{border:1px solid #2a506d;background:linear-gradient(145deg,#112b45,#0b1e31);padding:20px;border-radius:17px;margin:0 0 20px;display:grid;gap:12px}
+.vault-experience-card h3{margin:0;font-size:17px;color:#f5faff}.vault-experience-card p{margin:0;color:#aac4d9;font-size:13px;line-height:1.6}
+.vault-experience-actions{display:flex;gap:10px;flex-wrap:wrap}.vault-experience-actions button{min-height:39px}
+.vault-accent-grid{display:flex;gap:10px;flex-wrap:wrap}.vault-accent-choice{width:42px;height:42px;border:2px solid #a9bbcd;border-radius:12px;cursor:pointer;display:grid;place-items:center;font-weight:900;color:white}.vault-accent-choice[aria-pressed="true"]{outline:3px solid white;outline-offset:2px}
+.vault-install-note{font-size:12px;color:#a4c3da;line-height:1.6}.vault-experience-card .btn{width:auto}
+.vault-tour-overlay{position:fixed;inset:0;background:#020b17d9;z-index:1000;display:none;align-items:center;justify-content:center;padding:18px}
+.vault-tour-overlay.open{display:flex}.vault-tour-dialog{max-width:490px;width:100%;background:#0e253d;border:1px solid var(--vault-accent);border-radius:20px;padding:25px;box-shadow:0 20px 70px #0009}
+.vault-tour-dialog h2{font-size:23px;margin:8px 0 12px}.vault-tour-dialog p{line-height:1.7;color:#b7cee1}.vault-tour-progress{font-size:11px;letter-spacing:.1em;color:var(--vault-accent-light)}
+.vault-tour-footer{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-top:23px}
+body[data-vault-theme="violet"]{--vault-accent:#aa85ff;--vault-accent-soft:#39255c;--vault-accent-light:#d3bcff}
+body[data-vault-theme="emerald"]{--vault-accent:#26cba3;--vault-accent-soft:#134b45;--vault-accent-light:#9cf5d9}
+body[data-vault-theme="gold"]{--vault-accent:#e9b75b;--vault-accent-soft:#544020;--vault-accent-light:#ffe3a4}
+body[data-vault-theme="rose"]{--vault-accent:#fa79ad;--vault-accent-soft:#5b2943;--vault-accent-light:#ffc3dc}
+body[data-vault-theme]:not([data-vault-theme="blue"]) .btn.primary{background:var(--vault-accent)!important;color:#071421!important}
+body[data-vault-theme]:not([data-vault-theme="blue"]) .vault-nav-link[aria-current="page"]{background:var(--vault-accent-soft)!important;border-color:var(--vault-accent)!important}
+body[data-vault-theme]:not([data-vault-theme="blue"]) .vault-nav-icon,body[data-vault-theme]:not([data-vault-theme="blue"]) .v12-kicker{color:var(--vault-accent-light)!important}
+body[data-vault-theme]:not([data-vault-theme="blue"]) #v12ActualBar{background:var(--vault-accent)!important}
+@media(max-width:540px){.vault-experience-card{padding:16px}.vault-experience-actions .btn{flex:1}}
