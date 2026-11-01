@@ -1,0 +1,1 @@
+Vault V2.2 release candidate: simplified home, separate Military Pay and Bills tabs, 2026 BAS reference, official BAH lookup link, mobile fixes and cache bump. Automatic BAH, base pay and per diem lookup not yet implemented. Browser QA required. Back up first.

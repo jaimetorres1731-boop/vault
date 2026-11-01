@@ -10,6 +10,8 @@ const definitions=[
 {id:'calendar',name:'Calendar',icon:'▦',desc:'Review savings activity by date.'},
 {id:'insights',name:'Insights',icon:'↗',desc:'Forecasts, reports, checkpoints and financial health.'},
 {id:'payday',name:'Payday Planner',icon:'▣',desc:'Plan recurring payday savings and set reminders.'},
+{id:'military',name:'Military Pay',icon:'★',desc:'Entitlements and military pay estimates.'},
+{id:'bills',name:'Bills',icon:'▤',desc:'Recurring expenses and cash flow.'},
 {id:'settings',name:'Settings',icon:'⚙',desc:'Privacy, backups, data protection and deployment settings.'}
 ];
 const oldChildren=[...root.children];
@@ -72,7 +74,7 @@ function link(def,short=false){const a=document.createElement('a');a.href='#'+de
 for(const def of definitions)navlinks.append(link(def));
 for(const id of ['home','transactions','goals','insights'])mobile.append(link(definitions.find(d=>d.id===id),true));
 const more=document.createElement('button');more.type='button';more.className='vault-nav-link vault-mobile-more';more.setAttribute('aria-label','More sections');more.setAttribute('aria-expanded','false');const mi=document.createElement('span');mi.className='vault-nav-icon';mi.textContent='⋯';const mt=document.createElement('span');mt.className='vault-nav-text';mt.textContent='More';more.append(mi,mt);mobile.append(more);
-for(const id of ['calendar','payday','settings'])moreMenu.append(link(definitions.find(d=>d.id===id)));
+for(const id of ['calendar','payday','military','bills','settings'])moreMenu.append(link(definitions.find(d=>d.id===id)));
 function closeMore(){moreMenu.classList.remove('is-open');more.setAttribute('aria-expanded','false')}
 more.onclick=()=>{const open=moreMenu.classList.toggle('is-open');more.setAttribute('aria-expanded',String(open))};
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeMore()});

@@ -1,0 +1,1 @@
+Vault V2.3 unified release candidate. Includes prior Vault features, simplified Home, dedicated Military Pay and Bills navigation, published 2026 E1-E7 base pay lookup for up to 8 years, published 2026 BAS, links to official BAH and per diem lookups with manual entry. No live automatic BAH or per diem rates. Browser testing required; back up existing records first.

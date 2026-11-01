@@ -1,0 +1,9 @@
+
+.vault-v22 #vault-page-home .vault-page-content{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:16px}
+.vault-v22 #vault-page-home .card{min-width:0}
+.vault-v22 #vault-page-home .hero{grid-column:1/-1}
+.vault-v22 .v22-reference{padding:12px;border:1px solid #375777;border-radius:12px;margin:12px 0;background:rgba(80,140,190,.08)}
+.vault-v22 .v22-reference p{margin:7px 0 10px}
+.vault-v22 .v21-metric,.vault-v22 .card{min-width:0;overflow-wrap:anywhere}
+.vault-v22 .v21-results{grid-template-columns:repeat(auto-fit,minmax(min(100%,210px),1fr))}
+@media(max-width:650px){.vault-v22 #vault-page-home .vault-page-content{grid-template-columns:minmax(0,1fr)}.vault-v22 .v21-fields{grid-template-columns:minmax(0,1fr)}}
