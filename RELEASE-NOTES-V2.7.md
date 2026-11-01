@@ -1,0 +1,1 @@
+Vault V2.7: Unified deployment savings app based on V2.6, with a new homepage countdown. Uses existing saved deployment dates, updates on savings plan changes, browser focus and daily rollover. No military pay or payday calculator. Back up your existing Vault data before deployment. Browser QA remains required.
