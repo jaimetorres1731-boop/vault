@@ -71,7 +71,7 @@ function lock(){if(localStorage.getItem(PINKEY)){$('vaultLock').style.display='f
 $('lockNow').onclick=lock;
 $('unlockBtn').onclick=async()=>{if(await hash($('unlockPin').value)===localStorage.getItem(PINKEY)){$('vaultLock').style.display='none';$('unlockError').textContent=''}else{$('unlockError').textContent='Incorrect PIN'}};
 $('unlockPin').onkeydown=e=>{if(e.key==='Enter')$('unlockBtn').click()};
-lock();
+// Required V4.0 PIN gate supersedes the legacy optional PIN lock.
 let deferredPrompt;
 window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferredPrompt=e;$('installApp').hidden=window.matchMedia('(display-mode: standalone)').matches||navigator.standalone===true});
 $('installApp').onclick=async()=>{if(deferredPrompt){deferredPrompt.prompt();await deferredPrompt.userChoice;deferredPrompt=null;$('installApp').hidden=true}};

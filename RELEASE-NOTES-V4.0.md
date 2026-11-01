@@ -1,0 +1,1 @@
+Vault V4.0: required 6-digit PIN, quick add, extra filters and sorting, customizable homepage, backup preview/restore, print-to-PDF reports, four themes, offline status and improved SW caching, mobile card spacing. PIN is not encryption. Browser testing pending. Back up existing data before upgrading.
