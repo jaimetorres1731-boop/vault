@@ -1,0 +1,1 @@
+Vault V2.6: Military Pay Calculator and Payday Planner removed from the interface and navigation. Existing savings, transactions, goals, calendar, insights, and bills remain. Legacy local data is not deleted. The old financial engine is retained solely for bills compatibility. Browser QA still required. Export a backup before updating.

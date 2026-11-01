@@ -9,8 +9,6 @@ const definitions=[
 {id:'goals',name:'Savings Goals',icon:'◎',desc:'Primary savings goal, optional goals and milestones.'},
 {id:'calendar',name:'Calendar',icon:'▦',desc:'Review savings activity by date.'},
 {id:'insights',name:'Insights',icon:'↗',desc:'Forecasts, reports, checkpoints and financial health.'},
-{id:'payday',name:'Payday Planner',icon:'▣',desc:'Plan recurring payday savings and set reminders.'},
-{id:'military',name:'Military Pay',icon:'★',desc:'Entitlements and military pay estimates.'},
 {id:'bills',name:'Bills',icon:'▤',desc:'Recurring expenses and cash flow.'},
 {id:'settings',name:'Settings',icon:'⚙',desc:'Privacy, backups, data protection and deployment settings.'}
 ];
@@ -50,8 +48,10 @@ take(find('v12Health'),pages.insights); // Monthly health
 take(find('insights'),pages.insights); // Savings forecasts and milestones
 take(find('monthlyReport'),pages.insights); // Monthly report
 
-take(find('v12Planner'),pages.payday); // Planner first
-take(find('reminders'),pages.payday); // Recurrence reminders
+// Retain legacy planner nodes for existing script compatibility, but remove them from the UI.
+const legacyPlanner=document.createElement('div');legacyPlanner.id='vault-legacy-planner';legacyPlanner.hidden=true;legacyPlanner.setAttribute('aria-hidden','true');document.body.append(legacyPlanner);
+take(find('v12Planner'),legacyPlanner);
+take(find('reminders'),legacyPlanner);
 
 take(find('v12Recovery'),pages.settings); // Backup readiness first
 take(find('data'),pages.settings); // Backup and restore
@@ -74,7 +74,7 @@ function link(def,short=false){const a=document.createElement('a');a.href='#'+de
 for(const def of definitions)navlinks.append(link(def));
 for(const id of ['home','transactions','goals','insights'])mobile.append(link(definitions.find(d=>d.id===id),true));
 const more=document.createElement('button');more.type='button';more.className='vault-nav-link vault-mobile-more';more.setAttribute('aria-label','More sections');more.setAttribute('aria-expanded','false');const mi=document.createElement('span');mi.className='vault-nav-icon';mi.textContent='⋯';const mt=document.createElement('span');mt.className='vault-nav-text';mt.textContent='More';more.append(mi,mt);mobile.append(more);
-for(const id of ['calendar','payday','military','bills','settings'])moreMenu.append(link(definitions.find(d=>d.id===id)));
+for(const id of ['calendar','bills','settings'])moreMenu.append(link(definitions.find(d=>d.id===id)));
 function closeMore(){moreMenu.classList.remove('is-open');more.setAttribute('aria-expanded','false')}
 more.onclick=()=>{const open=moreMenu.classList.toggle('is-open');more.setAttribute('aria-expanded',String(open))};
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeMore()});
@@ -82,7 +82,7 @@ document.addEventListener('click',e=>{if(!moreMenu.contains(e.target)&&!more.con
 function activate(id){if(!pages[id])id='home';for(const def of definitions){const panel=find('vault-page-'+def.id);panel.classList.toggle('vault-page-active',def.id===id);panel.hidden=def.id!==id}
 for(const a of document.querySelectorAll('.vault-nav-link[href]')){if(a.getAttribute('href')==='#'+id)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current')}
 closeMore();window.scrollTo({top:0,behavior:'instant'});document.title='Vault | '+definitions.find(d=>d.id===id).name}
-function hashToTab(){const h=location.hash.replace('#','');return ({dashboard:'home',activity:'transactions',plan:'transactions',data:'settings',calendarSection:'calendar',monthlyReport:'insights',v12Overview:'home',v12Activity:'transactions',v12Planner:'payday',v12Health:'insights',v12Recovery:'settings',reminders:'payday'})[h]||h}
+function hashToTab(){const h=location.hash.replace('#','');return ({dashboard:'home',activity:'transactions',plan:'transactions',data:'settings',calendarSection:'calendar',monthlyReport:'insights',v12Overview:'home',v12Activity:'transactions',v12Planner:'insights',v12Health:'insights',v12Recovery:'settings',reminders:'settings'})[h]||h}
 window.addEventListener('hashchange',()=>activate(hashToTab()));
 // Route existing shortcut buttons into their new tab while retaining their original behavior.
 for(const id of ['addShortcut','withdrawShortcut']){const b=find(id);if(b)b.addEventListener('click',()=>{activate('transactions');history.replaceState(null,'','#transactions')})}

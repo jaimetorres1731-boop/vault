@@ -1,0 +1,1 @@
+Vault V2.4: Payday Planner removed from navigation and interface. Military Pay remains. Legacy planner nodes retained invisibly for compatibility with older JavaScript and stored data. No existing financial data is intentionally deleted. Requires browser testing before production deployment.
