@@ -1,0 +1,1 @@
+Code audit identified and repaired mismatched V4.0 page selectors. JavaScript syntax and ZIP integrity checks performed. Full browser end-to-end tests NOT completed because Chromium navigation was blocked by environment. Treat this as a release candidate, not verified production build. Back up current data before trying.

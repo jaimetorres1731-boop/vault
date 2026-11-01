@@ -1,11 +1,11 @@
 
 /* Vault V4.0 final: breathing room and polished mobile cards */
-.vault-page-content{display:grid!important;gap:22px!important;align-content:start}
+#dashboard{gap:22px!important;align-content:start}
 .vault-page-content>.card,.vault-page-content>.full,.vault-page-content>.vault-countdown,.vault-page-content>section{margin:0!important;min-width:0}
 .vault-page-content .card{border-radius:22px}
-#vault-page-home .vault-page-content{gap:22px!important}
-#vault-page-home .vault-page-content>.card{padding:clamp(19px,4vw,28px)!important}
-#vault-page-home .vault-page-content>.card+.card{margin-top:0!important}
+#dashboard{gap:22px!important}
+#dashboard>.card{padding:clamp(19px,4vw,28px)!important}
+#dashboard>.card+.card{margin-top:0!important}
 #vaultMonthlyPulse{grid-column:1/-1}
 .v40-panel{border:1px solid rgba(106,166,219,.25);background:linear-gradient(155deg,#142b43,#0b1b2e);border-radius:22px;padding:22px;box-shadow:0 15px 40px #0002}
 .v40-panel h3{margin:0 0 13px;font-size:18px}
@@ -28,8 +28,8 @@ body[data-v40-theme="slate"] .card,body[data-v40-theme="slate"] .v40-panel{backg
 #vaultGate[hidden]{display:none!important}
 #setPin,#clearPin,#lockNow,#vaultLock{display:none!important}
 @media(max-width:720px){
-.vault-page-content,#vault-page-home .vault-page-content{display:flex!important;flex-direction:column;gap:20px!important}
-.vault-page-content>*{width:100%!important;max-width:100%;flex:none!important}
+#dashboard{display:flex!important;flex-direction:column;gap:20px!important}
+#dashboard>*{width:100%!important;max-width:100%;flex:none!important}
 .v40-fields{grid-template-columns:1fr}
 .v40-panel{padding:19px;border-radius:20px}
 #dashboard>.card{margin:0!important}

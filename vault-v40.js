@@ -10,10 +10,10 @@ const save=()=>{try{localStorage.setItem(UI,JSON.stringify(prefs))}catch{}};
 const card=(title,html)=>{const el=document.createElement('section');el.className='v40-panel';el.innerHTML='<h3>'+title+'</h3>'+html;return el};
 const field=(id,label,type='text')=>'<div><label for="'+id+'">'+label+'</label><input id="'+id+'" type="'+type+'"></div>';
 function ready(){
- const home=$('vault-page-home')?.querySelector('.vault-page-content');
- const transactions=$('vault-page-transactions')?.querySelector('.vault-page-content');
- const insights=$('vault-page-insights')?.querySelector('.vault-page-content');
- const settings=$('vault-page-settings')?.querySelector('.vault-page-content');
+ const home=$('dashboard');
+ const transactions=$('activity');
+ const insights=$('data');
+ const settings=$('data');
  if(!home||!transactions||!insights||!settings)return;
  document.body.dataset.v40Theme=prefs.theme;
  // Quick add uses existing validated transaction form to preserve data integrity.
@@ -24,7 +24,7 @@ function ready(){
  const amount=Number($('v40Amount').value),data=get();
  if(!Number.isFinite(amount)||amount<=0){$('v40QuickMsg').textContent='Enter a positive amount.';return}
  if(!data){$('v40QuickMsg').textContent='Savings data unavailable.';return}
- const bal=Number(data.settings?.starting||0)+data.transactions.reduce((n,t)=>n+(t.type==='deposit'?t.amount:-t.amount),0);
+ const bal=Number(data.settings?.starting||0)+data.transactions.reduce((n,t)=>n+(t.type==='deposit'?Number(t.amount):-Number(t.amount)),0);
  if($('v40Type').value==='withdrawal'&&amount>bal){$('v40QuickMsg').textContent='Withdrawal exceeds savings.';return}
  $('type').value=$('v40Type').value;$('amount').value=amount.toFixed(2);
  $('date').value=new Date().toLocaleDateString('en-CA');if(!$('date').value.match(/^\d{4}-\d\d-\d\d$/)){const d=new Date();$('date').value=[d.getFullYear(),String(d.getMonth()+1).padStart(2,'0'),String(d.getDate()).padStart(2,'0')].join('-')}
@@ -33,7 +33,7 @@ function ready(){
  };
  // Enhanced filters work alongside the existing text, type, category filters.
  const filter=card('More transaction filters','<div class="v40-fields">'+field('v40From','From','date')+field('v40To','Through','date')+'<div><label for="v40Sort">Sort transactions</label><select id="v40Sort"><option value="newest">Newest first</option><option value="oldest">Oldest first</option><option value="high">Highest amount</option><option value="low">Lowest amount</option></select></div></div><div class="v40-row"><button class="btn" id="v40ClearFilters">Clear additional filters</button></div>');
- transactions.insertBefore(filter,transactions.firstChild);
+ transactions.append(filter);
  const history=$('history');
  let busy=false;
  function applyFilters(){
