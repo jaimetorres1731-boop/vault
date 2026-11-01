@@ -147,4 +147,39 @@ try{const data=JSON.parse(localStorage.getItem(KEY)||'null');if(data&&parse(data
 render();window.addEventListener('focus',render);document.addEventListener('visibilitychange',()=>{if(!document.hidden)render()});setInterval(render,60000);
 }
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
-})();</script></body></html>
+})();</script>
+<style id="vault-v33-style">
+#vaultMonthlyPulse{grid-column:1/-1}
+#vaultMonthlyPulse .pulse-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+#vaultMonthlyPulse .pulse-cell{background:rgba(4,17,30,.5);border:1px solid #2c4961;border-radius:15px;padding:16px;min-width:0}
+#vaultMonthlyPulse .pulse-cell strong{display:block;font-size:clamp(19px,2.7vw,30px);margin-top:8px;overflow-wrap:anywhere;font-variant-numeric:tabular-nums}
+#vaultMonthlyPulse .pulse-meta{color:#a4bdd2;font-size:12px;margin-top:12px}
+@media(max-width:600px){#vaultMonthlyPulse .pulse-grid{grid-template-columns:1fr}}
+</style>
+<script id="vault-v33-feature">
+(()=>{
+'use strict';
+const KEY='vault-deployment-v3';
+const fmt=n=>new Intl.NumberFormat('en-US',{style:'currency',currency:'USD'}).format(n);
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+function render(){
+ const dash=document.getElementById('dashboard');if(!dash)return;
+ let card=document.getElementById('vaultMonthlyPulse');
+ if(!card){card=document.createElement('section');card.id='vaultMonthlyPulse';card.className='card';card.setAttribute('aria-label','Monthly savings snapshot');dash.append(card)}
+ let data;try{data=JSON.parse(localStorage.getItem(KEY)||'{}')}catch{data={}}
+ const tx=Array.isArray(data.transactions)?data.transactions:[];
+ const now=new Date(),month=now.getFullYear()+'-'+String(now.getMonth()+1).padStart(2,'0');
+ const prev=new Date(now.getFullYear(),now.getMonth()-1,1),prior=prev.getFullYear()+'-'+String(prev.getMonth()+1).padStart(2,'0');
+ const totals=m=>tx.filter(t=>typeof t.date==='string'&&t.date.startsWith(m)&&['deposit','withdrawal'].includes(t.type)&&Number.isFinite(Number(t.amount))&&Number(t.amount)>0).reduce((a,t)=>(a[t.type]+=Number(t.amount),a),{deposit:0,withdrawal:0});
+ const a=totals(month),b=totals(prior),net=a.deposit-a.withdrawal,old=b.deposit-b.withdrawal;
+ const diff=net-old;
+ const label=new Intl.DateTimeFormat('en-US',{month:'long',year:'numeric'}).format(now);
+ card.innerHTML='<div class="split"><h2 style="margin:0">Monthly savings snapshot</h2><span class="small">'+esc(label)+'</span></div><div class="pulse-grid" style="margin-top:18px"><div class="pulse-cell"><span class="small">Deposits this month</span><strong>'+fmt(a.deposit)+'</strong></div><div class="pulse-cell"><span class="small">Withdrawals this month</span><strong>'+fmt(a.withdrawal)+'</strong></div><div class="pulse-cell"><span class="small">Net saved this month</span><strong>'+fmt(net)+'</strong></div></div><p class="pulse-meta">'+(tx.length?'Compared with last month: '+(diff>=0?'+':'')+fmt(diff)+' in net savings.':'Add your first transaction to start tracking monthly savings.')+'</p>';
+}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',render);else render();
+window.addEventListener('vault-updated',render);
+window.addEventListener('storage',e=>{if(e.key===KEY)render()});
+document.addEventListener('visibilitychange',()=>{if(!document.hidden)render()});
+})();
+</script>
+</body></html>
