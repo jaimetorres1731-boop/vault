@@ -1,23 +1,16 @@
-# Vault V1.5 — Customizable Dashboard
+# Vault V2.1 — Military Pay and Stability Release Candidate
 
-This release builds on Vault V1.4.1 and preserves all existing data, transaction categories, Insights, tutorial, and navigation.
+Includes previous Vault V2 features plus military pay and entitlements planner, full/reduced per diem periods, recurring monthly bills, savings forecasts, CSV export, and complete backup/restore integration.
 
-## New features
-- Customize Dashboard button on the Dashboard tab.
-- Show or hide Financial Overview, Deployment Progress, and Quick Stats.
-- Move sections up/down to choose their order.
-- Total Savings is always visible and always first.
-- Reset layout to the recommended defaults.
-- Changes are stored locally under `vault-v15-dashboard-layout` and restored when the app reopens.
-- Accessible dialog and controls with keyboard labels; mobile-friendly design.
-- No financial records are moved, changed, or deleted.
+## Important limitations
+- Official rates are **not automatically retrieved**. Enter verified amounts from DFAS, the DoD BAH lookup, orders, LES, or travel authorization. ZIP, pay grade, and rate year are reference fields only.
+- Per diem is a travel reimbursement estimate and is deliberately separate from recurring monthly pay.
+- Estimated deductions are manually entered. FSA eligibility is not inferred.
+- The planner saves to this device only, and a PIN does not encrypt data. Export a full backup before upgrading.
+- Browser/device acceptance testing remains necessary before calling this production-ready.
 
-## Deployment
-1. Export your existing Vault JSON backup before upgrading.
-2. Extract this ZIP into the root of your existing GitHub Pages repository and replace matching files.
-3. Commit, wait for Pages to deploy, then refresh/reopen the installed app.
-4. Test Customize Dashboard, hide/show, move up/down, reset, refresh persistence, and mobile layout.
-
-Note: Layout settings are device/browser-local and are not currently included in JSON backup exports. This is separate from financial records.
-
-Validation: JavaScript syntax and ZIP integrity checked. Live browser tests are still required.
+## Deploy
+1. Export your complete backup from the live app.
+2. Upload all ZIP contents (inside `vault-main/`) to the GitHub Pages repository root.
+3. After deployment, reload the installed app, and test the Military pay tab, backup/restore, transactions, and offline loading.
+4. Compare every calculated estimate to your actual LES/orders.
