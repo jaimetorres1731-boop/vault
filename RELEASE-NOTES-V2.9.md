@@ -1,0 +1,1 @@
+V2.9: Replaced older countdown card with independent, visible date form. Dates and 440-day length can be edited on Home; saves locally and shows days left and progress. Removed older countdown script from page. Service worker cache bumped. Other savings features preserved. Browser testing still needed.

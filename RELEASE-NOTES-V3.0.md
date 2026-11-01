@@ -1,0 +1,1 @@
+V3.0: Countdown code and styling embedded directly in index.html, removing reliance on a separately uploaded countdown script. Complete application files included. Existing saved data remains. Backup before deploying.

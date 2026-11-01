@@ -1,0 +1,14 @@
+
+#vaultCountdownV29{display:block!important;visibility:visible!important;opacity:1!important;background:#10253a!important;color:#f5faff!important;padding:24px!important;grid-column:1/-1;max-width:100%;box-sizing:border-box}
+#vaultCountdownV29 .v29-top{display:flex;justify-content:space-between;align-items:center;gap:12px}
+#vaultCountdownV29 h2{margin:0;color:#fff!important}
+#vaultCountdownV29 .v29-top span{border:1px solid #4e7d9b;border-radius:20px;padding:4px 10px;color:#a9dfff}
+#vaultCountdownV29 .v29-number{font-size:clamp(38px,8vw,74px)!important;line-height:1.15;font-weight:800;color:#fff!important;background:transparent!important;width:auto!important;height:auto!important;min-height:65px;margin-top:22px;opacity:1!important;-webkit-text-fill-color:#fff!important}
+#vaultCountdownV29 .v29-label,#vaultCountdownV29 #v29Progress{color:#c1dff3!important;margin:8px 0 16px}
+#vaultCountdownV29 .v29-track{height:11px;border-radius:30px;background:#27475e;overflow:hidden}
+#vaultCountdownV29 #v29Fill{height:100%;width:0;background:#53baff}
+#vaultCountdownV29 form{display:grid!important;grid-template-columns:repeat(auto-fit,minmax(min(100%,190px),1fr));gap:12px;margin-top:22px;visibility:visible!important;opacity:1!important}
+#vaultCountdownV29 label{display:flex!important;flex-direction:column;gap:6px;color:#e6f3ff!important}
+#vaultCountdownV29 input{display:block!important;visibility:visible!important;opacity:1!important;box-sizing:border-box;width:100%;background:#fff!important;color:#172b3e!important;-webkit-text-fill-color:#172b3e!important;border:1px solid #7798af;border-radius:8px;padding:12px;font-size:16px;color-scheme:light}
+#vaultCountdownV29 button{background:#2f9ef5!important;color:white!important;border:0;border-radius:8px;padding:12px 18px;cursor:pointer;font-weight:700;align-self:end;min-height:46px}
+#vaultCountdownV29 #v29Status{color:#bce7ff!important}
