@@ -34,3 +34,11 @@ body[data-v40-theme="slate"] .card,body[data-v40-theme="slate"] .v40-panel{backg
 .v40-panel{padding:19px;border-radius:20px}
 #dashboard>.card{margin:0!important}
 }
+
+/* V4.1: spacing applies to navigation-created page content, not only legacy dashboard */
+.vault-page-content{gap:20px!important;min-width:0}
+.vault-page-content>*{min-width:0;max-width:100%;box-sizing:border-box}
+.vault-page-content .v40-panel{width:100%;box-sizing:border-box}
+.v40-panel input,.v40-panel select{box-sizing:border-box;max-width:100%}
+.v40-item{flex-wrap:wrap}
+@media(max-width:720px){.vault-page-content{gap:16px!important}.v40-item .v40-row{width:100%;justify-content:flex-start}.v40-panel{padding:18px!important}}

@@ -10,10 +10,10 @@ const save=()=>{try{localStorage.setItem(UI,JSON.stringify(prefs))}catch{}};
 const card=(title,html)=>{const el=document.createElement('section');el.className='v40-panel';el.innerHTML='<h3>'+title+'</h3>'+html;return el};
 const field=(id,label,type='text')=>'<div><label for="'+id+'">'+label+'</label><input id="'+id+'" type="'+type+'"></div>';
 function ready(){
- const home=$('dashboard');
+ const home=$('vault-page-home')?.querySelector('.vault-page-content');
  const transactions=$('activity');
- const insights=$('data');
- const settings=$('data');
+ const insights=$('vault-page-insights')?.querySelector('.vault-page-content');
+ const settings=$('vault-page-settings')?.querySelector('.vault-page-content');
  if(!home||!transactions||!insights||!settings)return;
  document.body.dataset.v40Theme=prefs.theme;
  // Quick add uses existing validated transaction form to preserve data integrity.
@@ -29,7 +29,7 @@ function ready(){
  $('type').value=$('v40Type').value;$('amount').value=amount.toFixed(2);
  $('date').value=new Date().toLocaleDateString('en-CA');if(!$('date').value.match(/^\d{4}-\d\d-\d\d$/)){const d=new Date();$('date').value=[d.getFullYear(),String(d.getMonth()+1).padStart(2,'0'),String(d.getDate()).padStart(2,'0')].join('-')}
  $('note').value=$('v40Note').value;$('txCategory').value='';
- $('transactionForm').requestSubmit();$('v40QuickMsg').textContent='Transaction submitted.';$('v40Amount').value='';$('v40Note').value='';
+ $('transactionForm').requestSubmit();$('v40QuickMsg').textContent='Transaction saved if the form validation passed.';if($('transactionForm').checkValidity()){$('v40Amount').value='';$('v40Note').value=''}
  };
  // Enhanced filters work alongside the existing text, type, category filters.
  const filter=card('More transaction filters','<div class="v40-fields">'+field('v40From','From','date')+field('v40To','Through','date')+'<div><label for="v40Sort">Sort transactions</label><select id="v40Sort"><option value="newest">Newest first</option><option value="oldest">Oldest first</option><option value="high">Highest amount</option><option value="low">Lowest amount</option></select></div></div><div class="v40-row"><button class="btn" id="v40ClearFilters">Clear additional filters</button></div>');
@@ -39,7 +39,7 @@ function ready(){
  function applyFilters(){
   if(busy)return;busy=true;
   const from=$('v40From').value,to=$('v40To').value,sort=$('v40Sort').value;
-  const data=get(),lookup=new Map((data?.transactions||[]).map(t=>[t.id,t]));
+  const data=get();
   const rows=[...history.querySelectorAll('li')];
   rows.forEach(li=>{
     const text=li.querySelector('small')?.textContent||'';
@@ -58,11 +58,11 @@ function ready(){
  for(const id of ['v40From','v40To','v40Sort'])$(id).addEventListener('change',applyFilters);
  $('v40ClearFilters').onclick=()=>{for(const id of ['v40From','v40To'])$(id).value='';$('v40Sort').value='newest';$('txSearch').value='';$('txFilter').value='all';$('txSearch').dispatchEvent(new Event('input'));applyFilters()};
  // Customizable home cards, preserving the primary savings balance.
- const customizable=()=>[...home.children].filter(el=>el!==quick&&el.classList.contains('card')||el.id==='vaultMonthlyPulse'||el.classList.contains('vault-countdown'));
+ 
  
  const dashboard=card('Customize homepage','<p class="v40-muted">Hide or reorder cards. The primary balance stays visible.</p><div id="v40CardList"></div><div class="v40-row"><button class="btn" id="v40ResetLayout">Reset layout</button></div>');
  settings.append(dashboard);
- const cards=()=>[...home.children].filter(el=>el!==quick&&el!==dashboard);
+ const cards=()=>[...home.children].filter(el=>el!==quick&&el!==dashboard&&el.matches('.card,.vault-countdown,#vaultMonthlyPulse')); 
  cards().forEach((el,i)=>{if(!el.dataset.v40Id)el.dataset.v40Id=el.id||'home-card-'+i});
  const primary=cards().find(el=>el.querySelector('#balance'))?.dataset.v40Id;
  function applyLayout(){
@@ -96,8 +96,8 @@ function ready(){
  $('v40Print').onclick=()=>{
  const data=get(),month=$('v40Month').value;if(!data||!/^\d{4}-\d{2}$/.test(month))return;
  const tx=[...data.transactions].sort((a,b)=>a.date.localeCompare(b.date));
- const before=tx.filter(t=>t.date<month).reduce((n,t)=>n+(t.type==='deposit'?t.amount:-t.amount),Number(data.settings.starting)||0);
- const inMonth=tx.filter(t=>t.date.startsWith(month)),deposits=inMonth.filter(t=>t.type==='deposit').reduce((n,t)=>n+t.amount,0),withdrawals=inMonth.filter(t=>t.type==='withdrawal').reduce((n,t)=>n+t.amount,0);
+ const before=tx.filter(t=>t.date<month).reduce((n,t)=>n+(t.type==='deposit'?Number(t.amount):-Number(t.amount)),Number(data.settings.starting)||0);
+ const inMonth=tx.filter(t=>t.date.startsWith(month)),deposits=inMonth.filter(t=>t.type==='deposit').reduce((n,t)=>n+Number(t.amount),0),withdrawals=inMonth.filter(t=>t.type==='withdrawal').reduce((n,t)=>n+Number(t.amount),0);
  const fmt=n=>new Intl.NumberFormat('en-US',{style:'currency',currency:'USD'}).format(n);
  const w=window.open('','_blank');if(!w){alert('Allow popups to generate the report.');return}
  const rows=inMonth.map(t=>'<tr><td>'+safe(t.date)+'</td><td>'+safe(t.type)+'</td><td>'+safe(t.category||'—')+'</td><td>'+safe(t.note||'')+'</td><td>'+fmt(t.amount)+'</td></tr>').join('');
