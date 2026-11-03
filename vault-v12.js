@@ -26,7 +26,7 @@ $('v12PaceExplanation').textContent=goal>0&&total>0?(percent>=expected?'Your rec
 const timeline=$('v12Timeline');timeline.replaceChildren();const recentTx=[...d.transactions].sort((a,b)=>b.date.localeCompare(a.date)||Number(b.created||0)-Number(a.created||0)).slice(0,6);
 if(!recentTx.length)timeline.append(node('p','No activity yet. Your latest deposits and withdrawals will appear here.','footnote'));
 for(const t of recentTx){const e=node('div',undefined,'v12-tx');const ic=node('div',t.type==='deposit'?'↓':'↑','v12-tx-icon'),info=node('div',undefined,'v12-tx-main');info.append(node('strong',t.note|| (t.type==='deposit'?'Savings deposit':'Savings withdrawal')),node('small',t.date));e.append(ic,info,node('div',`${t.type==='deposit'?'+':'−'}${fmt(t.amount)}`,'v12-tx-amount '+(t.type==='deposit'?'pos':'neg')));timeline.append(e)}
-const h=$('v12HealthStats');h.replaceChildren();for(const [label,value] of [['Net saving months',`${positive.filter(([,v])=>v.in>v.out).length} / ${positive.length}`],['Last 3 active months',recent.length?fmt(avg):'—'],['Withdrawals this month',fmt(months.get(monthKey(today))?.out||0)]]){const el=node('div');el.append(node('span',label),node('strong',value));h.append(el)}
+const h=$('v12HealthStats');h.replaceChildren();for(const [label,value] of [['Net saving months',`${positive.filter(([,v])=>v.in>v.out).length} / ${positive.length}`],['Average monthly net (last 3 active months)',recent.length?fmt(avg):'—'],['Withdrawals this month',fmt(months.get(monthKey(today))?.out||0)]]){const el=node('div');el.append(node('span',label),node('strong',value));h.append(el)}
 const ex=read(EXTRA),last=ex?.reminders?.lastBackup;
 $('v12BackupStatus').textContent=last?`Last recorded JSON export: ${last}. Keep the downloaded file in a safe location. Your browser data does not sync automatically.`:'No recorded full backup export yet. Download a JSON backup before changing browsers or devices.';
 const plan=read(PLAN)||{};let date=plan.date||'';const pay=Number(plan.amount||0);
@@ -37,7 +37,7 @@ const plan=read(PLAN)||{};$('v12PayAmount').value=plan.amount??'';$('v12PayDate'
 $('v12SavePlan').onclick=()=>{const amount=Number($('v12PayAmount').value),date=$('v12PayDate').value,cycle=$('v12PayCycle').value;if(!Number.isFinite(amount)||amount<0||!date){alert('Enter a nonnegative amount and payday date.');return}localStorage.setItem(PLAN,JSON.stringify({amount,date,cycle}));render()};
 $('v12Export').onclick=()=>document.getElementById('export').click();
 $('v12BackupCheck').onclick=()=>{const b=getData(),x=read(EXTRA);if(!b||!b.transactions.every(t=>['deposit','withdrawal'].includes(t.type)&&Number.isFinite(t.amount)&&t.amount>0)){alert('Record validation failed. Export your data and review transactions.');return}if(x&&(!Array.isArray(x.goals)||!x.goals.every(g=>Number.isFinite(g.allocated)&&g.allocated>=0))){alert('Optional goal validation failed.');return}alert(`Local records look structurally valid: ${b.transactions.length} transactions and ${x?.goals?.length||0} optional goals. This is not a full backup restoration test.`)};
-window.addEventListener('vault-updated',render);
+window.addEventListener('vault-updated',render);window.addEventListener('vault-backup-created',render);
 $('privacyToggle')?.addEventListener('click',()=>setTimeout(render,0));
 const history=$('history');if(history){const obs=new MutationObserver(()=>{clearTimeout(obs.wait);obs.wait=setTimeout(render,80)});obs.observe(history,{childList:true})}
 render();

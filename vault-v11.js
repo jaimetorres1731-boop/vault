@@ -34,7 +34,7 @@ function draw(){
  $('milestones').textContent=g>0?`Primary goal milestones: ${milestones}`:'Set your primary goal to see milestones.';
  $('insightStats').replaceChildren();
  const lastPay=sorted.filter(t=>t.type==='deposit'&&/pay/i.test(t.note||'')).at(-1);
- for(const [label,value] of [['Net saved this month',currency(byMonth.get(today.slice(0,7))?.deposits-byMonth.get(today.slice(0,7))?.withdrawals||0)],['Average monthly net',recent.length?currency(avg):'—'],['Last labeled payday deposit',lastPay?currency(lastPay.amount):'—'],['Months with activity',String(monthly.length)]]){const box=el('div',undefined,'stat');box.append(el('small',label),el('strong',value));$('insightStats').append(box)}
+ for(const [label,value] of [['Net saved this month',currency(byMonth.get(today.slice(0,7))?.deposits-byMonth.get(today.slice(0,7))?.withdrawals||0)],['Average monthly net (last 6 active months)',recent.length?currency(avg):'—'],['Last labeled payday deposit',lastPay?currency(lastPay.amount):'—'],['Months with activity',String(monthly.length)]]){const box=el('div',undefined,'stat');box.append(el('small',label),el('strong',value));$('insightStats').append(box)}
  // Goals: trim allocation only after explicit user approval; never silently move funds
  const totalAllocated=ext.goals.reduce((a,x)=>a+Number(x.allocated),0);
  $('subGoals').replaceChildren();
@@ -52,13 +52,13 @@ function draw(){
  $('reminderList').textContent=notices.length?notices.join('  •  '):'No reminders due. Reminders appear when Vault is open.';
 }
 $('goalForm').onsubmit=e=>{e.preventDefault();const name=$('subGoalName').value.trim(),target=Number($('subGoalTarget').value),allocated=Number($('subGoalAllocated').value),d=parse(),total=ext.goals.reduce((a,g)=>a+g.allocated,0);if(!name||!Number.isFinite(target)||target<=0||!Number.isFinite(allocated)||allocated<0||total+allocated>balance(d)+0.001){alert('Check goal values. Allocations cannot exceed available savings.');return}ext.goals.push({id:crypto.randomUUID?.()||String(Date.now()),name,target,allocated});save();e.target.reset()};
-$('prevMonth').onclick=()=>{month.setMonth(month.getMonth()-1);draw()};
-$('nextMonth').onclick=()=>{month.setMonth(month.getMonth()+1);draw()};
+$('prevMonth').onclick=()=>{month.setMonth(month.getMonth()-1);$('dayDetails').textContent='Select a day to see transactions.';draw()};
+$('nextMonth').onclick=()=>{month.setMonth(month.getMonth()+1);$('dayDetails').textContent='Select a day to see transactions.';draw()};
 $('nextPayday').value=ext.reminders.payday||'';
 $('paydayFrequency').value=ext.reminders.frequency||'none';
 $('backupFrequency').value=ext.reminders.backup||'30';
 $('saveReminder').onclick=()=>{ext.reminders={...ext.reminders,payday:$('nextPayday').value,frequency:$('paydayFrequency').value,backup:$('backupFrequency').value};save()};
-const backupBtn=$('export');backupBtn.addEventListener('click',()=>{ext.reminders.lastBackup=today;save()});
+window.addEventListener('vault-backup-created',()=>{ext.reminders.lastBackup=iso(new Date());save();window.dispatchEvent(new Event('vault-updated'))});
 const originalImport=$('import');originalImport.addEventListener('change',()=>{setTimeout(draw,100)});
 window.addEventListener('vault-updated',()=>{try{ext={...structuredClone(blank),...JSON.parse(localStorage.getItem(EXT)||'{}')}}catch{}draw()});
 const observe=new MutationObserver(()=>{clearTimeout(observe.timer);observe.timer=setTimeout(draw,100)});observe.observe($('history'),{childList:true});
